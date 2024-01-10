@@ -1,0 +1,1 @@
+export const exportTestModuleAlias = 'hello module alias!'
