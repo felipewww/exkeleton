@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  back:
+    image: node-18-ts-5:latest
+    container_name: exk-back
+    tty: true
+    command: >
+      sh -c "cd app && npm run dev"
+    volumes:
+      - ../../back:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - exk-network
+    depends_on:
+      - mongo
+      - rmq
+
+  mysql:
+    image: mysql:8.0.23
+    container_name: exk-mysql
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=""
+    volumes:
+      - ./db/mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "33062:3306"
+    networks:
+      - exk-network
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+        - ./db/mongo/mongodb:/data/db
+        - ./db/mongo/mongodb_config:/data/configdb
+    command: mongod
+    ports:
+      - "27017:27017"
+    networks:
+      - exk-network
+
+  rmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - exk-network
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '5000:3000'
+    volumes:
+      - ./db/grafana-storage:/var/lib/grafana
+
+networks:
+  exk-network:
+    driver: bridge
+
+volumes:
+  grafana-storage: {}
+  db:
+    driver: local

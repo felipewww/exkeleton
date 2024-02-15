@@ -16,7 +16,7 @@ const onCallGroups: Array<OnCallEntity> = [
     ]),
 
     new OnCallEntity([
-        employees[2],
+        employees[0],
         employees[3],
     ]),
 

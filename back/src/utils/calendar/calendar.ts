@@ -33,11 +33,6 @@ export class Calendar {
         console.log(gen.daysInMonth())
     }
 
-    weekNumber() {
-        dayjs.extend(weekOfYear)
-        return dayjs().week()
-    }
-
     weekByDate(ymdStr?: string): ICurrentWeek {
         dayjs.extend(weekOfYear)
 
