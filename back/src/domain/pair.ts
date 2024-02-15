@@ -1,6 +1,6 @@
 import {EmployeeEntity} from "@/domain/entities/employee.entity";
 import {OnCallEntity} from "@/domain/entities/on-call.entity";
-import {OnCallScheduler} from "@/domain/on-call-scheduler";
+import { OnCallSchedulerServiceFactory } from "@/factory/domain/services/factory.services";
 
 const employees: Array<EmployeeEntity> = [
     new EmployeeEntity('Felipe', 'felipe.barreiros@carrot.eco', 'felipewww'),
@@ -36,7 +36,8 @@ export class Pair {
     }
 
     init() {
-        const onCallScheduler = new OnCallScheduler(onCallGroups)
+        // const onCallScheduler = new OnCallSchedulerService(onCallGroups)
+        const onCallScheduler = OnCallSchedulerServiceFactory(onCallGroups)
 
         onCallScheduler.init()
     }
