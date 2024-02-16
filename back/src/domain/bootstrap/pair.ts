@@ -1,6 +1,7 @@
 import {EmployeeEntity} from "@/domain/entities/employee.entity";
 import {OnCallEntity} from "@/domain/entities/on-call.entity";
-import { OnCallSchedulerServiceFactory } from "@/factory/domain/services/factory.services";
+import {app} from "@/core/server";
+import {Bootstrapable} from "@/core/bootstrap";
 
 const employees: Array<EmployeeEntity> = [
     new EmployeeEntity('Felipe', 'felipe.barreiros@carrot.eco', 'felipewww'),
@@ -9,7 +10,7 @@ const employees: Array<EmployeeEntity> = [
     new EmployeeEntity('José', 'ze@carrot.eco', 'zewww'),
 ]
 
-const onCallGroups: Array<OnCallEntity> = [
+export const onCallGroups: Array<OnCallEntity> = [
     new OnCallEntity([
         employees[0],
         employees[1],
@@ -31,14 +32,8 @@ const onCallGroups: Array<OnCallEntity> = [
     ]),
 ]
 
-export class Pair {
-    constructor() {
-    }
-
-    init() {
-        // const onCallScheduler = new OnCallSchedulerService(onCallGroups)
-        const onCallScheduler = OnCallSchedulerServiceFactory(onCallGroups)
-
-        onCallScheduler.init()
+export class Pair implements Bootstrapable {
+    async init() {
+        app.services.onCallSchedulerService.init()
     }
 }
