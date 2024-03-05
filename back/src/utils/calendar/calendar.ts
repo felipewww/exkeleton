@@ -2,7 +2,9 @@ import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import {InvalidMonthError} from "@/utils/calendar/errors";
 import {ICurrentWeek} from "@/utils/calendar/types";
+import {singleton} from "tsyringe";
 
+@singleton()
 export class Calendar {
     
     public static formats = {

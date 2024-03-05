@@ -1,6 +1,6 @@
 import {EmployeeEntity} from "@/domain/entities/employee.entity";
 import {OnCallEntity} from "@/domain/entities/on-call.entity";
-import {app} from "@/core/server";
+import {AppContext} from "@/core/server";
 import {Bootstrapable} from "@/core/bootstrap";
 
 const employees: Array<EmployeeEntity> = [
@@ -34,6 +34,6 @@ export const onCallGroups: Array<OnCallEntity> = [
 
 export class Pair implements Bootstrapable {
     async init() {
-        app.services.onCallSchedulerService.init()
+        // AppContext.services.onCallSchedulerService.init()
     }
 }

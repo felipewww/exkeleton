@@ -2,12 +2,12 @@ import express from "express";
 import {bootstrap} from "@/core/bootstrap";
 import {App} from "@/core/app";
 
-export const app = App()
-export const server = express()
+export const AppContext = App()
+export const Server = express()
 
 bootstrap()
     .then(() => {
-        server.listen(process.env.APP_PORT, () => {
+        Server.listen(process.env.APP_PORT, () => {
             console.log(`Server init [port:${process.env.APP_PORT}]`.yellow.bold)
             console.log(`\nApplication running`.green.bold)
             console.log('\n')

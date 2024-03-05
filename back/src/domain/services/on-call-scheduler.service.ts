@@ -19,8 +19,8 @@ import {ScheduleRepo} from "@/domain/repos/schedule.repo";
 
 export class OnCallSchedulerService {
     constructor(
-        private onCallGroups: Array<OnCallEntity>,
-        private scheduleRepo: ScheduleRepo,
+        private onCallGroups: Array<OnCallEntity> = [],
+        // private scheduleRepo: ScheduleRepo,
         private calendar: Calendar
     ) {
     }
